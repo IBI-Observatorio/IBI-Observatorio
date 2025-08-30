@@ -105,7 +105,7 @@ const ConceptsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-900 to-ibi-dark relative overflow-hidden">
+    <section id="conceitos-fundamentais" className="py-20 bg-gradient-to-b from-gray-900 to-ibi-dark relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
       </div>

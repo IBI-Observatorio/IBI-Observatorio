@@ -10,6 +10,13 @@ const Hero = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  
+  const scrollToConceptos = () => {
+    const elemento = document.getElementById('conceitos-fundamentais');
+    if (elemento) {
+      elemento.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-ibi-dark to-gray-900">
@@ -87,6 +94,7 @@ const Hero = () => {
 
           <div className="flex flex-col items-center gap-4">
             <motion.button
+              onClick={scrollToConceptos}
               className="bg-gradient-to-r from-ibi-green to-ibi-blue text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
