@@ -47,7 +47,7 @@ const Hero = () => {
           className="text-center"
         >
           <motion.img
-            src="/logo.png"
+            src="./logo.png"
             alt="IBI Logo"
             className="w-64 mx-auto mb-8"
             initial={{ scale: 0.5, opacity: 0 }}

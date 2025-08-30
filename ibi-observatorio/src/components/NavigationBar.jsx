@@ -49,7 +49,7 @@ const NavigationBar = () => {
             transition={{ duration: 0.5 }}
             className="flex items-center"
           >
-            <img src="/logo.png" alt="IBI" className="h-10 w-auto" />
+            <img src="./logo.png" alt="IBI" className="h-10 w-auto" />
             <span className="ml-2 text-white font-semibold text-lg">
               Observatório de Dados
             </span>

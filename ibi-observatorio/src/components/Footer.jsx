@@ -11,7 +11,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <img src="/logo.png" alt="IBI Logo" className="w-32 mb-4" />
+            <img src="./logo.png" alt="IBI Logo" className="w-32 mb-4" />
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Instituto Brasileiro de Infraestrutura - Transformando dados em 
               inteligência estratégica para a infraestrutura nacional.
