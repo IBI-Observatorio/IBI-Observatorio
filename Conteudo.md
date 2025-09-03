@@ -73,7 +73,7 @@ Disponibilizar dados agregados e análises para a sociedade civil, academia, set
 ### Inteligência Artificial para Otimização e Automação:
 Aplicar soluções avançadas de inteligência artificial e aprendizado de máquina para otimizar processos de análise de grandes volumes de dados, automatizar a identificação de correlações complexas e insights profundos, e desenvolver sistemas de suporte à decisão que aprimorem a eficiência na alocação de recursos e na gestão proativa da infraestrutura de transportes. A IA também será capaz de gerar relatórios densos para atendimento aos mantenedores e parlamentares da Frente Parlamentar de Portos e Aeroportos.
 
-## POSSÍVEIS IMPACTOS E MELHORIAS TANGÍVEIS NA INFRAESTRUTURA LOGÍSTICA NACIONAL:
+## POSSÍVEIS IMPACTOS E MELHORIAS MENSURÁVEIS NA INFRAESTRUTURA LOGÍSTICA NACIONAL:
 
 - **Redução Significativa de Custos Logísticos:** Ao identificar e permitir a mitigação de gargalos crônicos e a otimização de rotas e modais, o Observatório contribui diretamente para a redução do "Custo Brasil Logístico", tornando a economia mais competitiva.
 

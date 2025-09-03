@@ -155,7 +155,7 @@ const ApplicationsSection = () => {
           className="bg-gradient-to-r from-ibi-green/10 to-ibi-blue/10 rounded-3xl p-12 border border-white/10"
         >
           <h3 className="text-3xl font-bold text-center text-white mb-12">
-            Impactos Tangíveis na Infraestrutura Nacional
+            Impactos Mensuráveis na Infraestrutura Nacional
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
