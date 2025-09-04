@@ -142,7 +142,7 @@ const ApplicationsSection = () => {
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-3">{app.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{app.description}</p>
+                  <p className="text-white text-sm leading-relaxed">{app.description}</p>
                 </div>
               </motion.div>
             );
