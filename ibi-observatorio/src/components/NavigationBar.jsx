@@ -22,6 +22,7 @@ const NavigationBar = () => {
     { name: 'Conceitos', href: '#concepts' },
     { name: 'Aplicações', href: '#applications' },
     { name: 'Implementação', href: '#implementation' },
+    { name: 'Apoiadores', href: '#sponsors' },
     { name: 'Contato', href: '#contact' }
   ];
 
