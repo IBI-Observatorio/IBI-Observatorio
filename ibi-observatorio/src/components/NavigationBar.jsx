@@ -1,10 +1,12 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
   const { scrollY } = useScroll();
   
   const opacity = useTransform(scrollY, [0, 100], [0, 1]);
@@ -23,13 +25,16 @@ const NavigationBar = () => {
     { name: 'Aplicações', href: '#applications' },
     { name: 'Implementação', href: '#implementation' },
     { name: 'Apoiadores', href: '#sponsors' },
-    { name: 'Contato', href: '#contact' }
+    { name: 'Contato', href: '#contact' },
+    { name: 'Análises', href: '/analises', isRoute: true },
   ];
 
   const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/' + href;
     }
     setIsOpen(false);
   };
@@ -64,7 +69,7 @@ const NavigationBar = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => item.isExternal ? window.open(item.href, '_blank', 'noopener,noreferrer') : item.isRoute ? navigate(item.href) : scrollToSection(item.href)}
                 className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium relative group"
               >
                 {item.name}
@@ -98,7 +103,7 @@ const NavigationBar = () => {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => item.isExternal ? window.open(item.href, '_blank', 'noopener,noreferrer') : item.isRoute ? navigate(item.href) : scrollToSection(item.href)}
                 className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-md text-base font-medium w-full text-left transition-colors duration-200"
               >
                 {item.name}
