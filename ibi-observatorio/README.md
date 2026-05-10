@@ -1,6 +1,6 @@
-# Observatório de Dados - IBI
+# Observatório de Infraestrutura de Transportes - IBI
 
-Landing page moderna para o Observatório de Dados do Instituto Brasileiro de Infraestrutura (IBI).
+Landing page moderna para o Observatório de Infraestrutura de Transportes do Instituto Brasileiro de Infraestrutura (IBI).
 
 ## 🚀 Características
 

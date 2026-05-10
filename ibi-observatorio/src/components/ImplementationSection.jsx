@@ -313,7 +313,7 @@ const ImplementationSection = () => {
             </span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Um plano detalhado e estruturado para a criação do Observatório de Dados
+            Um plano detalhado e estruturado para a criação do Observatório de Infraestrutura de Transportes
           </p>
         </motion.div>
 

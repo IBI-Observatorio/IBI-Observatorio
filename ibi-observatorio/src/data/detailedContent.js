@@ -377,7 +377,7 @@ export const detailedContent = {
     title: "Métricas de Sucesso - KPIs Detalhados",
     content: `
       <h3>Indicadores Quantitativos e Qualitativos</h3>
-      <p>Sistema abrangente de métricas para avaliar o desempenho e impacto do Observatório de Dados.</p>
+      <p>Sistema abrangente de métricas para avaliar o desempenho e impacto do Observatório de Infraestrutura de Transportes.</p>
       
       <h4>Cobertura e Qualidade de Dados</h4>
       <ul>

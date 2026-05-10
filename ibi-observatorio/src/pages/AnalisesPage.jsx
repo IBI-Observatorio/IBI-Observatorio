@@ -75,7 +75,7 @@ export default function AnalisesPage() {
           className="mb-12"
         >
           <p className="text-ibi-green text-xs font-bold uppercase tracking-widest mb-3">
-            Observatório de Dados · IBI
+            Observatório de Infraestrutura de Transportes · IBI
           </p>
           <h1 className="text-white text-4xl font-bold mb-4">Análises</h1>
           <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">

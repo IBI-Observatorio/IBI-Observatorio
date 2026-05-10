@@ -57,7 +57,7 @@ const NavigationBar = () => {
           >
             <img src="./logo.png" alt="IBI" className="h-10 w-auto" />
             <span className="ml-2 text-white font-semibold text-lg">
-              Observatório de Dados
+              Observatório de Infraestrutura de Transportes
             </span>
           </motion.div>
 

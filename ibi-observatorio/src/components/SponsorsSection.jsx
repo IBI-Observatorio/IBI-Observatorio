@@ -44,7 +44,7 @@ function SponsorsSection() {
             </span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Empresas que apoiam o desenvolvimento do Observatório de Dados do IBI
+            Empresas que apoiam o desenvolvimento do Observatório de Infraestrutura de Transportes do IBI
           </p>
         </motion.div>
 

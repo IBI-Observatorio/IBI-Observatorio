@@ -69,7 +69,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-ibi-green to-ibi-blue">
-              Observatório de Dados
+              Observatório de Infraestrutura de Transportes
             </span>
           </motion.h1>
           

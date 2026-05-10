@@ -46,7 +46,7 @@ Embora simulação e otimização sejam distintas, elas frequentemente se comple
 
 ## APLICAÇÕES E RELEVÂNCIA DO OBSERVATÓRIO DE DADOS
 
-O Observatório de Dados terá um papel transformador no setor, atuando como um hub centralizado de conhecimento e inteligência para a infraestrutura de transportes no Brasil.
+O Observatório de Infraestrutura de Transportes terá um papel transformador no setor, atuando como um hub centralizado de conhecimento e inteligência para a infraestrutura de transportes no Brasil.
 
 Sua relevância reside na capacidade de transformar dados brutos e dispersos em informações acionáveis que subsidiam a tomada de decisões estratégicas em todos os níveis.
 
@@ -91,7 +91,7 @@ Aplicar soluções avançadas de inteligência artificial e aprendizado de máqu
 
 ## IMPLEMENTAÇÃO E SUSTENTABILIDADE
 
-A implementação de um Observatório de Dados desta magnitude é um projeto complexo que requer um planejamento meticuloso e compromisso de longo prazo.
+A implementação de um Observatório de Infraestrutura de Transportes desta magnitude é um projeto complexo que requer um planejamento meticuloso e compromisso de longo prazo.
 
 ## PLANO DE IMPLEMENTAÇÃO DETALHADO:
 
