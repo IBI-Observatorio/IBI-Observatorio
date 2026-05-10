@@ -3,7 +3,6 @@ import NavigationBar from './components/NavigationBar'
 import Hero from './components/Hero'
 import ConceptsSection from './components/ConceptsSection'
 import ApplicationsSection from './components/ApplicationsSection'
-import ImplementationSection from './components/ImplementationSection'
 import SponsorsSection from './components/SponsorsSection'
 import Footer from './components/Footer'
 import SobrecustoPage from './pages/SobrecustoPage'
@@ -24,9 +23,6 @@ function HomePage() {
       </section>
       <section id="applications">
         <ApplicationsSection />
-      </section>
-      <section id="implementation">
-        <ImplementationSection />
       </section>
       <section id="sponsors">
         <SponsorsSection />
