@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, Star, Database, Beaker, BookOpen, Calendar, MapPin, TrendingUp, FileText, Archive, RefreshCw, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Star, Database, Beaker, BookOpen, Calendar, MapPin, TrendingUp, FileText, Archive, RefreshCw, AlertTriangle, ExternalLink } from 'lucide-react';
 import IndicadorInterativo from '../../components/antaq/IndicadorInterativo';
 import { CORES_CLUSTER, DATA_BASE } from '../../components/antaq/cores';
 
@@ -53,6 +53,7 @@ export default function IndicadorPage() {
   const cor = CORES_CLUSTER[slugCluster] || '#0099D8';
   const usaInterativo =
     indicador.destaque && indicador.dados?.length > 0 && indicador.grafico;
+  const temBlocos = !!indicador.o_que_e;
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
@@ -135,20 +136,17 @@ export default function IndicadorPage() {
               )}
             </div>
 
-            {indicador.achados?.length > 0 && (
-              <div className="rounded-2xl border border-gray-700 bg-gray-900/60 p-6">
-                <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
-                  <BookOpen className="h-5 w-5 text-ibi-green" /> Achados
-                </h2>
-                <ul className="space-y-2 text-sm">
-                  {indicador.achados.map((a, i) => (
-                    <li key={i} className="flex gap-2 text-gray-300">
-                      <span className="text-ibi-blue">·</span>
-                      <span>{a}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {/* Blocos editoriais (pirâmide invertida) — só quando o_que_e existe */}
+            {temBlocos && (
+              <>
+                <BlocoOQueE data={indicador.o_que_e} />
+                {indicador.como_funciona && (
+                  <BlocoComoFunciona data={indicador.como_funciona} />
+                )}
+                {indicador.por_que_bimestral && (
+                  <BlocoPorQueBimestral data={indicador.por_que_bimestral} />
+                )}
+              </>
             )}
 
             {indicador.card_previsao_atual && (
@@ -170,7 +168,39 @@ export default function IndicadorPage() {
               <BlocoTransparencia links={indicador.links_transparencia} />
             )}
 
-            {indicador.dados?.length > 0 && <TabelaDados dados={indicador.dados} />}
+            {temBlocos && (
+              <>
+                {indicador.detalhes_tecnicos && (
+                  <BlocoDetalhesTecnicos data={indicador.detalhes_tecnicos} />
+                )}
+                {indicador.limitacoes && (
+                  <BlocoLimitacoes data={indicador.limitacoes} />
+                )}
+                {indicador.reprodutibilidade && (
+                  <BlocoReprodutibilidade data={indicador.reprodutibilidade} />
+                )}
+              </>
+            )}
+
+            {!temBlocos && indicador.achados?.length > 0 && (
+              <div className="rounded-2xl border border-gray-700 bg-gray-900/60 p-6">
+                <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
+                  <BookOpen className="h-5 w-5 text-ibi-green" /> Achados
+                </h2>
+                <ul className="space-y-2 text-sm">
+                  {indicador.achados.map((a, i) => (
+                    <li key={i} className="flex gap-2 text-gray-300">
+                      <span className="text-ibi-blue">·</span>
+                      <span>{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {!temBlocos && indicador.dados?.length > 0 && (
+              <TabelaDados dados={indicador.dados} />
+            )}
           </div>
 
           <aside className="space-y-6">
@@ -277,7 +307,6 @@ function TrackRecord({ registros, metricas }) {
   };
   const fmtPp = (v) => v == null ? '—' : (v >= 0 ? '+' : '') + Number(v).toFixed(2);
 
-  // Separa por tipo para o separador visual
   const valHist = registros.filter((r) => r.tipo === 'validacao_historica');
   const prod    = registros.filter((r) => r.tipo === 'producao');
 
@@ -420,8 +449,8 @@ function DisclaimerVintage({ texto }) {
 // ─── Bloco de transparência (3 links) ─────────────────────────────────────
 function BlocoTransparencia({ links }) {
   const itens = [
-    { chave: 'nota_tecnica',     label: 'Nota técnica completa',           Icon: FileText },
-    { chave: 'h1_arquivado',     label: 'Por que não publicamos em h=1',   Icon: Archive },
+    { chave: 'nota_tecnica',       label: 'Nota técnica completa',           Icon: FileText },
+    { chave: 'h1_arquivado',       label: 'Por que não publicamos em h=1',   Icon: Archive },
     { chave: 'compromisso_retest', label: 'Compromisso de re-test mai/2028', Icon: RefreshCw },
   ];
   return (
@@ -449,45 +478,144 @@ function BlocoTransparencia({ links }) {
   );
 }
 
-function BlocoPrevisao({ previsao, modelo }) {
-  const fmtMes = (s) => {
-    const d = new Date(s);
-    if (Number.isNaN(d.getTime())) return s;
-    return d.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
-  };
+// ── Blocos editoriais (pirâmide invertida) ────────────────────────────────
+
+function BlocoOQueE({ data }) {
+  const items = [
+    { label: 'O que é.', texto: data.o_que_e },
+    { label: 'Para que serve.', texto: data.para_que_serve },
+    { label: 'Quão bom é.', texto: data.quao_bom },
+    { label: 'O que ele não faz.', texto: data.o_que_nao_faz },
+  ];
   return (
-    <div className="rounded-xl border border-red-900/40 bg-red-950/20 p-5">
-      <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-red-300">
-        <TrendingUp className="h-4 w-4" /> Previsão IBI
-      </h3>
-      <div className="space-y-3">
-        {previsao.map((p) => (
-          <div key={p.mes} className="border-b border-red-900/30 pb-2 last:border-0 last:pb-0">
-            <div className="text-xs uppercase tracking-wide text-red-300/70">
-              {fmtMes(p.mes)}
-            </div>
-            <div className="mt-0.5 text-2xl font-bold text-white">
-              {p.indice_predito?.toFixed(1)}
-              <span className="ml-1 text-xs font-normal text-gray-500">pts do índice</span>
-            </div>
-            <div className="text-xs text-gray-400">
-              Intervalo 80%: {p.indice_low_p10?.toFixed(1)} – {p.indice_high_p90?.toFixed(1)}
-            </div>
-          </div>
-        ))}
-      </div>
-      {modelo && (
-        <p className="mt-4 text-[11px] leading-relaxed text-gray-500">
-          MAE em backtest: <span className="text-gray-400">{modelo.mae_pp?.toFixed(1)} pp</span>
-          {' · '}
-          n_treino: <span className="text-gray-400">{modelo.n_treino}m</span>
-          {' · '}
-          regressão linear sobre var. 12m
+    <div className="rounded-2xl border border-gray-700 bg-gray-900/60 p-6 space-y-4">
+      {items.map(({ label, texto }) => (
+        <p key={label} className="text-sm text-gray-300 leading-relaxed">
+          <strong className="text-gray-100">{label}</strong>{' '}{texto}
         </p>
+      ))}
+    </div>
+  );
+}
+
+function BlocoComoFunciona({ data }) {
+  return (
+    <div className="rounded-2xl border border-gray-700 bg-gray-900/60 p-6">
+      <h3 className="mb-3 text-base font-semibold">Como funciona</h3>
+      <p className="text-sm text-gray-400 mb-4">{data.introducao}</p>
+      <ol className="space-y-3 mb-4">
+        {data.fontes?.map((f) => (
+          <li key={f.numero} className="flex gap-3 text-sm text-gray-300">
+            <span className="shrink-0 w-5 h-5 rounded-full bg-blue-500/20 text-blue-400
+                             text-xs flex items-center justify-center font-bold mt-0.5">
+              {f.numero}
+            </span>
+            <span>
+              <strong className="text-gray-100">{f.titulo}.</strong>{' '}{f.descricao}
+            </span>
+          </li>
+        ))}
+      </ol>
+      <p className="text-sm text-gray-400">{data.pesos}</p>
+    </div>
+  );
+}
+
+function BlocoPorQueBimestral({ data }) {
+  return (
+    <div className="rounded-2xl border border-gray-700 bg-gray-900/60 p-6">
+      <h3 className="mb-3 text-base font-semibold">Por que apenas em horizonte de 2 meses</h3>
+      <p className="text-sm text-gray-300 leading-relaxed">{data.texto}</p>
+      {data.link_arquivado && (
+        <a href={data.link_arquivado}
+           className="mt-3 inline-flex items-center gap-1 text-xs text-blue-400 hover:underline">
+          <ExternalLink className="h-3 w-3" /> Ver análise arquivada h=1
+        </a>
       )}
     </div>
   );
 }
+
+function BlocoDetalhesTecnicos({ data }) {
+  if (!data) return null;
+  const secoes = [
+    { label: 'Especificação',            key: 'especificacao' },
+    { label: 'Validação',                key: 'validacao' },
+    { label: 'Encompassing test',        key: 'encompassing_test' },
+    { label: 'Pesos rolling OOS',        key: 'pesos_rolling' },
+    { label: 'Intervalos de previsão',   key: 'intervalos_previsao' },
+    { label: 'Diagnósticos de resíduo',  key: 'diagnosticos_residuo' },
+    { label: 'Critério de publicação',   key: 'criterio_publicacao' },
+  ];
+  return (
+    <details className="rounded-2xl border border-gray-700 bg-gray-900/60 overflow-hidden">
+      <summary className="cursor-pointer select-none p-6 text-sm font-semibold
+                          text-gray-400 hover:text-gray-200 transition-colors list-none">
+        ▶ {data.label}
+      </summary>
+      <div className="border-t border-gray-700 px-6 pb-6 pt-4 space-y-5">
+        {secoes.map(({ label, key }) =>
+          data[key] ? (
+            <div key={key}>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
+                {label}
+              </p>
+              <p className="text-sm text-gray-300 leading-relaxed">{data[key]}</p>
+            </div>
+          ) : null,
+        )}
+      </div>
+    </details>
+  );
+}
+
+function BlocoLimitacoes({ data }) {
+  if (!data?.items?.length) return null;
+  return (
+    <div className="rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-base font-semibold text-yellow-300">
+        <AlertTriangle className="h-4 w-4" /> Limitações e disclaimers
+      </h3>
+      <ul className="space-y-3">
+        {data.items.map((item) => (
+          <li key={item.label} className="text-sm text-gray-300 leading-relaxed">
+            <strong className="text-gray-100">{item.label}.</strong>{' '}{item.texto}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function BlocoReprodutibilidade({ data }) {
+  if (!data?.links?.length) return null;
+  return (
+    <div className="rounded-2xl border border-gray-700 bg-gray-900/60 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-base font-semibold">
+        <FileText className="h-4 w-4 text-blue-400" /> Reprodutibilidade e transparência
+      </h3>
+      <ul className="space-y-2">
+        {data.links.map((link) => (
+          <li key={link.label}>
+            {link.href ? (
+              <a href={link.href}
+                 className="inline-flex items-center gap-2 text-sm text-blue-400 hover:underline">
+                <span>{link.emoji}</span> {link.label}
+              </a>
+            ) : (
+              <span className="inline-flex items-center gap-2 text-sm text-gray-500">
+                <span>{link.emoji}</span> {link.label}
+                <span className="text-xs text-gray-600">(em breve)</span>
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// ── Componentes de suporte ─────────────────────────────────────────────────
 
 function Bloco({ titulo, icon: Icon, children }) {
   return (
@@ -514,8 +642,7 @@ function TabelaDados({ dados }) {
   const colunas = Object.keys(dados[0] || {});
   const limite = 50;
 
-  // Para séries temporais, ordenar do mais recente para o mais antigo —
-  // é o que o leitor espera ver primeiro.
+  // Para séries temporais, ordenar do mais recente para o mais antigo.
   const colTemporal = ['mes', 'Mes', 'data', 'Ano', 'ano']
     .find((c) => colunas.includes(c));
   const ordenados = colTemporal
