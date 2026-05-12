@@ -109,9 +109,11 @@ export default function IndicadorPage() {
             </p>
           )}
 
-          <p className="mt-4 max-w-3xl text-gray-300 leading-relaxed">
-            <Markdown source={indicador.descricao} />
-          </p>
+          {!temBlocos && (
+            <p className="mt-4 max-w-3xl text-gray-300 leading-relaxed">
+              <Markdown source={indicador.descricao} />
+            </p>
+          )}
         </div>
       </section>
 
