@@ -23,10 +23,8 @@ const NavigationBar = () => {
     { name: 'Início', href: '#home' },
     { name: 'Conceitos', href: '#concepts' },
     { name: 'Aplicações', href: '#applications' },
-    { name: 'Implementação', href: '#implementation' },
     { name: 'Apoiadores', href: '#sponsors' },
     { name: 'Contato', href: '#contact' },
-    { name: 'Análises', href: '/analises', isRoute: true },
   ];
 
   const scrollToSection = (href) => {
