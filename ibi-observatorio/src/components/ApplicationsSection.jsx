@@ -1,20 +1,6 @@
-import { motion, useScroll, useTransform, useMotionValue, animate } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useRef, useEffect, useState } from 'react';
-import { 
-  Route, 
-  Building2, 
-  TrendingUp, 
-  Eye, 
-  Shield, 
-  Users,
-  DollarSign,
-  Zap,
-  MapPin,
-  Lock,
-  Leaf,
-  Wrench
-} from 'lucide-react';
+import { Route, Building2, TrendingUp, Eye, Users, Zap } from 'lucide-react';
 
 const applications = [
   {
@@ -55,54 +41,14 @@ const applications = [
   }
 ];
 
-const impacts = [
-  { icon: DollarSign, title: "Redução de Custos Logísticos", value: 30 },
-  { icon: Zap, title: "Aumento de Eficiência", value: 45 },
-  { icon: MapPin, title: "Melhoria de Conectividade", value: 60 },
-  { icon: Lock, title: "Aumento de Segurança", value: 50 },
-  { icon: Leaf, title: "Sustentabilidade Ambiental", value: 40 },
-  { icon: Wrench, title: "Otimização de Manutenção", value: 35 }
-];
-
-const AnimatedCounter = ({ value, inView }) => {
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    if (inView) {
-      const controls = animate(0, value, { 
-        duration: 2,
-        ease: "easeOut",
-        onUpdate: (latest) => {
-          setDisplayValue(Math.round(latest));
-        }
-      });
-      return controls.stop;
-    }
-  }, [inView, value]);
-
-  return (
-    <motion.div className="text-3xl font-bold text-ibi-blue mb-1">
-      {displayValue}%
-    </motion.div>
-  );
-};
-
 const ApplicationsSection = () => {
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
 
-  const scrollRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start end", "end start"]
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
-
   return (
-    <section ref={scrollRef} className="py-20 bg-gradient-to-b from-ibi-dark to-gray-900 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-b from-ibi-dark to-gray-900 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -120,7 +66,7 @@ const ApplicationsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {applications.map((app, index) => {
             const Icon = app.icon;
             return (
@@ -148,37 +94,6 @@ const ApplicationsSection = () => {
             );
           })}
         </div>
-
-        <motion.div
-          ref={ref}
-          style={{ scale }}
-          className="bg-gradient-to-r from-ibi-green/10 to-ibi-blue/10 rounded-3xl p-12 border border-white/10"
-        >
-          <h3 className="text-3xl font-bold text-center text-white mb-12">
-            Impactos Mensuráveis na Infraestrutura Nacional
-          </h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {impacts.map((impact, index) => {
-              const Icon = impact.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="mb-3 mx-auto w-16 h-16 bg-gradient-to-br from-ibi-green to-ibi-blue rounded-full flex items-center justify-center">
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <AnimatedCounter value={impact.value} inView={inView} />
-                  <div className="text-xs text-gray-400">{impact.title}</div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
