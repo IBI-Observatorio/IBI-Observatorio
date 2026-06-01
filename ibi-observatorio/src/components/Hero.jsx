@@ -1,16 +1,8 @@
 import { motion } from 'framer-motion';
-import { ChevronDown, Info } from 'lucide-react';
-import { useState } from 'react';
-import Modal from './Modal';
-import { detailedContent } from '../data/detailedContent';
+import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import InteractiveDots from './InteractiveDots';
 
 const Hero = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-  
   const scrollToConceptos = () => {
     const elemento = document.getElementById('conceitos-fundamentais');
     if (elemento) {
@@ -61,7 +53,7 @@ const Hero = () => {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
           />
-          
+
           <motion.h1
             className="text-5xl md:text-7xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +64,7 @@ const Hero = () => {
               Observatório de Infraestrutura de Transportes
             </span>
           </motion.h1>
-          
+
           <motion.h2
             className="text-2xl md:text-3xl text-gray-300 mb-8"
             initial={{ opacity: 0, y: 20 }}
@@ -81,41 +73,43 @@ const Hero = () => {
           >
             Instituto Brasileiro de Infraestrutura
           </motion.h2>
-          
+
           <motion.p
             className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            Transformando dados em inteligência estratégica para revolucionar 
+            Transformando dados em inteligência estratégica para revolucionar
             a infraestrutura de transportes no Brasil
           </motion.p>
 
-          <div className="flex flex-col items-center gap-4">
-            <motion.button
-              onClick={scrollToConceptos}
-              className="bg-gradient-to-r from-ibi-green to-ibi-blue text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <motion.a
+              href="https://dados.ibi-observatorio.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-ibi-green to-ibi-blue text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 inline-flex items-center gap-2"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Explorar o Projeto
-            </motion.button>
+              Acessar a Plataforma de Dados
+              <ArrowUpRight className="w-5 h-5" />
+            </motion.a>
 
             <motion.button
-              onClick={openModal}
-              className="border border-ibi-blue text-ibi-blue px-4 py-2 rounded-full font-medium text-sm hover:bg-ibi-blue hover:text-white transition-all duration-300 flex items-center gap-2"
+              onClick={scrollToConceptos}
+              className="border border-white/20 text-gray-200 px-7 py-4 rounded-full font-medium hover:bg-white/5 transition-all duration-300"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.9 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Info className="w-4 h-4" />
-              Saiba Mais sobre Simulações
+              Conhecer o projeto
             </motion.button>
           </div>
         </motion.div>
@@ -128,15 +122,6 @@ const Hero = () => {
       >
         <ChevronDown className="text-white w-8 h-8 opacity-50" />
       </motion.div>
-
-      {/* Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        title={detailedContent.simulacoes.title}
-      >
-        <div dangerouslySetInnerHTML={{ __html: detailedContent.simulacoes.content }} />
-      </Modal>
     </section>
   );
 };
