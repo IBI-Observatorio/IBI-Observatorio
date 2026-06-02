@@ -27,7 +27,7 @@ const Footer = () => {
             <div className="space-y-2 text-sm text-gray-400">
               <div className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                contato@ibi.gov.br
+                observatorio@ibinfraestrutura.org.br
               </div>
               <div className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
